@@ -1,6 +1,6 @@
 import "./styles.css";
 import React, { useState, useRef } from "react";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -9,21 +9,25 @@ import {
   useCollectionData
 } from "react-firebase-hooks/firestore";
 
-firebase.initializeApp({
-  apiKey: "AIzaSyDimU1Ww9Ddb2OGKcHJECjNWZt41jMtfWw",
-  authDomain: "chatreact-ca281.firebaseapp.com",
-  projectId: "chatreact-ca281",
-  storageBucket: "chatreact-ca281.appspot.com",
-  messagingSenderId: "342527518600",
-  appId: "1:342527518600:web:d6f9f4d383fd38bf8a3c3d"
-});
-const auth = firebase.default.auth();
+function initializeFirebase() {
+  var config = {
+    apiKey: "AIzaSyDimU1Ww9Ddb2OGKcHJECjNWZt41jMtfWw",
+    authDomain: "chatreact-ca281.firebaseapp.com",
+    projectId: "chatreact-ca281",
+    storageBucket: "chatreact-ca281.appspot.com",
+    messagingSenderId: "342527518600",
+    appId: "1:342527518600:web:d6f9f4d383fd38bf8a3c3d"
+  };
+  firebase.initializeApp(config);
+}
+
+const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function SignIn() {
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopUp(provider);
+    auth.signInWithPopup(provider);
   };
   return (
     <button className="sign-in" onClick={signInWithGoogle}>
